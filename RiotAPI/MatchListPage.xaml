@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="RiotAPI.MatchListPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RiotAPI"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800"
+             Background="Black"
+             Name="MatchListPageControl">
+    <UserControl.Resources>
+        <Grid Height="80" x:Key="GridTemplate">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="11*"/>
+                <RowDefinition Height="14*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="71*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="104*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="111*"/>
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.RowSpan="3">
+                <TextBlock Foreground="White" Text="Match 1"/>
+            </Viewbox>
+
+            <Viewbox Grid.Column="2" HorizontalAlignment="Right" Width="80">
+                <TextBlock Foreground="White" Text="Champion:"/>
+            </Viewbox>
+            <Viewbox Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" Width="35">
+                <TextBlock Foreground="White" Text="KDA:"/>
+            </Viewbox>
+            <Viewbox Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" Width="100">
+                <TextBlock Foreground="White" Text="Gold Earned:"/>
+            </Viewbox>
+        </Grid>
+    </UserControl.Resources>
+    <Viewbox>
+        <Grid Height="600" Width="800">
+            <Label Foreground="White" Content="Results for Summoner:" FontSize="40" Margin="187,42,196,498" Opacity="{Binding LoadingOpacity, ElementName=MatchListPageControl}"/>
+            <Label Foreground="White" Name="Sumname" Content="{Binding MatchListSummonerName, ElementName=MatchListPageControl, FallbackValue=Summoner Name}" HorizontalAlignment="Center" FontSize="40" Margin="187,116,196,424" Opacity="{Binding LoadingOpacity, ElementName=MatchListPageControl}"/>
+            <ScrollViewer Margin="236,181,244,40" Height="400" VerticalScrollBarVisibility="Hidden" Opacity="{Binding LoadingOpacity, ElementName=MatchListPageControl}">
+                <StackPanel Name="MatchListStack">
+                    <Grid Height="80">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15*"/>
+                            <RowDefinition Height="11*"/>
+                            <RowDefinition Height="14*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="71*"/>
+                            <ColumnDefinition Width="25*"/>
+                            <ColumnDefinition Width="104*"/>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="111*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderThickness="1" BorderBrush="White" Grid.RowSpan="3" Grid.ColumnSpan="5"/>
+
+                        <Viewbox Grid.RowSpan="3">
+                            <TextBlock Foreground="White" Text="Match 1"/>
+                        </Viewbox>
+
+                        <Viewbox Grid.Column="2" HorizontalAlignment="Right" Width="80">
+                            <TextBlock Foreground="White" Text="Champion:"/>
+                        </Viewbox>
+                        <Viewbox Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" Width="35">
+                            <TextBlock Foreground="White" Text="KDA:"/>
+                        </Viewbox>
+                        <Viewbox Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" Width="100">
+                            <TextBlock Foreground="White" Text="Gold Earned:"/>
+                        </Viewbox>
+
+                        <Viewbox Grid.Column="4" HorizontalAlignment="Left">
+                            <TextBlock Foreground="White" Text="Teemo"/>
+                        </Viewbox>
+                        <Viewbox Grid.Column="4" Grid.Row="1" HorizontalAlignment="Left">
+                            <TextBlock Foreground="White" Text="15/7/12"/>
+                        </Viewbox>
+                        <Viewbox Grid.Column="4" Grid.Row="2" HorizontalAlignment="Left">
+                            <TextBlock Foreground="White" Text="15623"/>
+                        </Viewbox>
+
+                        <Button Grid.Row="2" Content="Details" Click="MatchDetailsButton"/>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+            <Grid Margin="187,150,205,347" Background="Black" Visibility="{Binding LoadingVisibility, ElementName=MatchListPageControl, FallbackValue=Collapsed}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="9*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Loading Matches. . ." Foreground="White" FontSize="40" HorizontalAlignment="Center"/>
+                <ProgressBar Grid.Row="2" Value="{Binding LoadingProgress, ElementName=MatchListPageControl}"/>
+            </Grid>
+            <Button Content="Save Results" Click="SaveResultsButtonClick" Margin="675,552,10,10" Visibility="{Binding SaveVisibility, ElementName=MatchListPageControl, FallbackValue=Collapsed}"/>
+            <Button Content="Load" Click="LoadButtonClick" Margin="10,552,675,10" Visibility="{Binding SaveVisibility, ElementName=MatchListPageControl, FallbackValue=Collapsed}"/>
+            <Button Content="Back" Click="BackButtonClick" Margin="10,10,696,552"/>
+        </Grid>
+    </Viewbox>
+</UserControl>
